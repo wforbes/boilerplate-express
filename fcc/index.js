@@ -155,7 +155,6 @@ function setupBackgroundApp(app, myApp, dirname) {
   try {
     //myApp.use(enableCORS);
     app.use('/', myApp);
-    //var stack = (myApp.parent._router && myApp.parent._router.stack) || [];
 	var stack = (myApp._router && myApp._router.stack) || [];
     var layers = stack.map((l) => l.name);
 
@@ -169,7 +168,6 @@ function setupBackgroundApp(app, myApp, dirname) {
 
     // check if /now route has a middleware before the handler
     var nowRoute = stack.filter((l) => {
-	  console.log(l);
       if (l.route) {
         return l.route.path === '/now';
       }
@@ -179,7 +177,6 @@ function setupBackgroundApp(app, myApp, dirname) {
       nowRoute = nowRoute[0];
       globals.nowRouteStackLength = nowRoute.route.stack.length;
     }
-	console.log(globals.nowRouteStackLength);
   } catch (e) {
     console.log(e);
   }
