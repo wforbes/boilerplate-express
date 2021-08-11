@@ -155,7 +155,7 @@ function setupBackgroundApp(app, myApp, dirname) {
   try {
     //myApp.use(enableCORS);
     app.use('/', myApp);
-	var stack = (myApp._router && myApp._router.stack) || [];
+	var stack = (app._router && app._router.stack) || [];
     var layers = stack.map((l) => l.name);
 
     // check if body-parser is mounted
