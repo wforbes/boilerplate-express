@@ -22,6 +22,11 @@ if (!process.env.DISABLE_XORIGIN) {
 	.use("/public", express.static(__dirname + '/public'))
 	.get("/", function(req, res) {
 		res.sendFile(__dirname + "/views/index.html");
+	})
+	.get("/json", function(req, res) {
+		res.json({
+			"message": "Hello json"
+		});
 	});
 }
 
