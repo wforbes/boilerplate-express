@@ -18,18 +18,12 @@ app.use("/public", express.static(__dirname + '/public'))
 		req.time = new Date().toString();
 		next();
 	}, function(req, res) {
-		// check if /now route has a middleware before the handler
-		// var stack = (myApp.parent._router && myApp.parent._router.stack) || [];
-		// var nowRoute = stack.filter((l) => {
-		// 	if (l.route) {
-		// 		return l.route.path === '/now';
-		// 	}
-		// 	return false;
-		// });
-		// myApp._router = myApp.parent._router;
 		res.json({
 			time: req.time
 		});
+	})
+	.get("/:word/echo", function (req, res) {
+		res.json({ echo: req.params.word });
 	});
 
 
