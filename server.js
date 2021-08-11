@@ -19,7 +19,7 @@ if (!process.env.DISABLE_XORIGIN) {
 		}
 		next();
 	}).get("/", function(req, res) {
-		res.send("Hello Express");
+		res.sendFile(__dirname + "/views/index.html");
 	});
 }
 
