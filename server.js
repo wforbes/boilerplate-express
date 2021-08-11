@@ -32,12 +32,12 @@ if (!process.env.DISABLE_XORIGIN) {
 			"message": (process.env.MESSAGE_STYLE === 'uppercase') ? "HELLO JSON" : "Hello json"
 		});
 	})
-	.get("/now", (req, res, next) => {
+	.get("/now", function(req, res, next) {
 		req.time = new Date().toString();
 		next();
-	}, (req, res) => {
+	}, function(req, res) {
 		res.json({
-			"time": req.time
+			time: req.time
 		});
 	});
 }
