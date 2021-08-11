@@ -37,7 +37,7 @@ if (!process.env.DISABLE_XORIGIN) {
 		next();
 	}, (req, res) => {
 		res.json({
-			time: req.time
+			"time": req.time
 		});
 	});
 }
