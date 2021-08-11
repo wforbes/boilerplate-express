@@ -18,7 +18,9 @@ if (!process.env.DISABLE_XORIGIN) {
 				res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		}
 		next();
-	}).get("/", function(req, res) {
+	})
+	.use("/public", express.static(__dirname + '/public'))
+	.get("/", function(req, res) {
 		res.sendFile(__dirname + "/views/index.html");
 	});
 }
