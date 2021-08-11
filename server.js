@@ -19,10 +19,6 @@ if (!process.env.DISABLE_XORIGIN) {
 		}
 		next();
 	})
-	.use((req, res, next) => {
-		console.log(`${req.method} ${req.path} - ${req.ip}`);
-		next();
-	})
 	.use("/public", express.static(__dirname + '/public'))
 	.get("/", function(req, res) {
 		res.sendFile(__dirname + "/views/index.html");
