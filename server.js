@@ -33,14 +33,14 @@ if (!process.env.DISABLE_XORIGIN) {
 		next();
 	}).get("/now", function(req, res) {
 		// check if /now route has a middleware before the handler
-		var stack = (myApp.parent._router && myApp.parent._router.stack) || [];
-		var nowRoute = stack.filter((l) => {
-			if (l.route) {
-				return l.route.path === '/now';
-			}
-			return false;
-		});
-		myApp._router = myApp.parent._router;
+		// var stack = (myApp.parent._router && myApp.parent._router.stack) || [];
+		// var nowRoute = stack.filter((l) => {
+		// 	if (l.route) {
+		// 		return l.route.path === '/now';
+		// 	}
+		// 	return false;
+		// });
+		// myApp._router = myApp.parent._router;
 		res.json({
 			time: req.time
 		});
@@ -50,7 +50,7 @@ if (!process.env.DISABLE_XORIGIN) {
 var port = process.env.PORT || 3000;
 myApp._router = { stack: [...app._router.stack] };
 bGround.setupBackgroundApp(app, myApp, __dirname).listen(port, function(){
-	//console.log(myApp.parent._router.stack);
+	console.log(myApp._router.stack);
 	bGround.log('Node is listening on port '+ port + '...')
 });
 
