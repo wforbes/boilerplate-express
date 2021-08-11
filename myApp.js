@@ -3,7 +3,7 @@ var app = express();
 app.use("/public", express.static(__dirname + '/public'))
 	.use(function(req, res, next) {
 		var logString = req.method + " " + req.path + " - " + req.ip;
-		res.send(logString);
+		console.log(logString);
 		next();
 	})
 	.get("/", function(req, res) {
