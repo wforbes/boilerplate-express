@@ -31,6 +31,14 @@ if (!process.env.DISABLE_XORIGIN) {
 		res.json({
 			"message": (process.env.MESSAGE_STYLE === 'uppercase') ? "HELLO JSON" : "Hello json"
 		});
+	})
+	.get("/now", (req, res, next) => {
+		req.time = new Date().toString();
+		next();
+	}, (req, res) => {
+		res.json({
+			time: req.time
+		});
 	});
 }
 
