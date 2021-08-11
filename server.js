@@ -3,7 +3,8 @@
  * the verification process may break
  * ***************************************************/
 
-var bGround = require('fcc-express-bground');
+//var bGround = require('fcc-express-bground');
+var bGround = require('./fcc');
 var myApp = require('./myApp');
 var express = require('express');
 var app = express();
@@ -28,10 +29,10 @@ if (!process.env.DISABLE_XORIGIN) {
 			"message": (process.env.MESSAGE_STYLE === 'uppercase') ? "HELLO JSON" : "Hello json"
 		});
 	})
-	.use("/now", function(req, res, next) {
+	.get("/now", function(req, res, next) {
 		req.time = new Date().toString();
 		next();
-	}).get("/now", function(req, res) {
+	}, function(req, res) {
 		// check if /now route has a middleware before the handler
 		// var stack = (myApp.parent._router && myApp.parent._router.stack) || [];
 		// var nowRoute = stack.filter((l) => {
@@ -50,7 +51,7 @@ if (!process.env.DISABLE_XORIGIN) {
 var port = process.env.PORT || 3000;
 myApp._router = { stack: [...app._router.stack] };
 bGround.setupBackgroundApp(app, myApp, __dirname).listen(port, function(){
-	console.log(myApp._router.stack);
+	//console.log(myApp._router.stack);
 	bGround.log('Node is listening on port '+ port + '...')
 });
 
