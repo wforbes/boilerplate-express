@@ -28,10 +28,19 @@ if (!process.env.DISABLE_XORIGIN) {
 			"message": (process.env.MESSAGE_STYLE === 'uppercase') ? "HELLO JSON" : "Hello json"
 		});
 	})
-	.get("/now", function(req, res, next) {
+	.use("/now", function(req, res, next) {
 		req.time = new Date().toString();
 		next();
-	}, function(req, res) {
+	}).get("/now", function(req, res) {
+		// check if /now route has a middleware before the handler
+		var stack = (myApp.parent._router && myApp.parent._router.stack) || [];
+		var nowRoute = stack.filter((l) => {
+			if (l.route) {
+				return l.route.path === '/now';
+			}
+			return false;
+		});
+		myApp._router = myApp.parent._router;
 		res.json({
 			time: req.time
 		});
@@ -40,6 +49,7 @@ if (!process.env.DISABLE_XORIGIN) {
 
 var port = process.env.PORT || 3000;
 bGround.setupBackgroundApp(app, myApp, __dirname).listen(port, function(){
+	//console.log(myApp.parent._router.stack);
 	bGround.log('Node is listening on port '+ port + '...')
 });
 
