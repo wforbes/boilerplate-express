@@ -1,4 +1,5 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
 app.use('/public', express.static(__dirname + '/public'))
 
@@ -6,7 +7,9 @@ app.use(function(req, res, next) {
 	var logString = req.method + ' ' + req.path + ' - ' + req.ip;
 	console.log(logString);
 	next();
-});
+})
+.use(bodyParser.urlencoded({ extended: false }))
+.use(bodyParser.json());
 	
 app.get('/', function(req, res) {
 	res.sendFile(__dirname + '/views/index.html');
@@ -31,8 +34,10 @@ app.get('/:word/echo', function (req, res) {
 	res.json({ echo: req.params.word });
 });
 
-app.get('/name', (req, res) => {
+app.route('/name').get((req, res) => {
 	res.json({ name: req.query.first + ' ' + req.query.last });
+}).post((req, res) => {
+	console.log(req.body.querystring);
 });
 // left off at https://www.freecodecamp.org/learn/apis-and-microservices/basic-node-and-express/get-query-parameter-input-from-the-client
 
