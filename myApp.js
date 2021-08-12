@@ -37,9 +37,9 @@ app.get('/:word/echo', function (req, res) {
 app.route('/name').get((req, res) => {
 	res.json({ name: req.query.first + ' ' + req.query.last });
 }).post((req, res) => {
-	console.log(req.body.querystring);
+	res.json({ name: req.body.first + ' ' + req.body.last });
 });
-// left off at https://www.freecodecamp.org/learn/apis-and-microservices/basic-node-and-express/get-query-parameter-input-from-the-client
+
 
 
 
